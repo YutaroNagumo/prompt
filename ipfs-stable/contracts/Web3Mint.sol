@@ -19,6 +19,9 @@ contract Web3Mint is ERC721{
         string  seed;
         string height;
         string width;
+        string guidance_scale;
+        string steps;
+
     }
 
     NftAttributes[] Web3Nfts;
@@ -33,7 +36,7 @@ contract Web3Mint is ERC721{
 
     // ユーザーが NFT を取得するために実行する関数です。
 
-    function mintIpfsNFT(string memory name , string memory description, string memory imageURI,string memory seed,string memory height,string memory width ) public{
+    function mintIpfsNFT(string memory name , string memory description, string memory imageURI,string memory seed,string memory height,string memory width,string memory guidance_scale,string memory steps ) public{
         uint256 newItemId = _tokenIds.current();
         _safeMint(msg.sender,newItemId);
         Web3Nfts.push(NftAttributes({
@@ -42,7 +45,9 @@ contract Web3Mint is ERC721{
             description : description,
             seed : seed,
             height : height,
-            width : width
+            width : width,
+            guidance_scale : guidance_scale,
+            steps : steps
         }));
         console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
         _tokenIds.increment();
@@ -58,7 +63,7 @@ contract Web3Mint is ERC721{
                     ' -- NFT #: ',
                     Strings.toString(_tokenId),
                     '", "description": "',Web3Nfts[_tokenId].description,'", "image": "ipfs://',
-                    Web3Nfts[_tokenId].imageURL,'","attributes" : [ {"trait_type": "seed", "value" : "',Web3Nfts[_tokenId].seed,'"},{"trait_type": "height", "value" : "',Web3Nfts[_tokenId].height,'"},{"trait_type": "width", "value" : "',Web3Nfts[_tokenId].width,'"}]}'
+                    Web3Nfts[_tokenId].imageURL,'","attributes" : [ {"trait_type": "seed", "value" : "',Web3Nfts[_tokenId].seed,'"},{"trait_type": "height", "value" : "',Web3Nfts[_tokenId].height,'"},{"trait_type": "width", "value" : "',Web3Nfts[_tokenId].width,'"},{"trait_type": "guidance_scale", "value" : "',Web3Nfts[_tokenId].guidance_scale,'"},{"trait_type": "steps", "value" : "',Web3Nfts[_tokenId].steps,'"}]}'
                 )
             )
         )

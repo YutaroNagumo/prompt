@@ -63,7 +63,7 @@ const NftUploader = () => {
   // NftUploader.jsx
 const askContractToMintNft = async (ipfs) => {
   const CONTRACT_ADDRESS =
-    "0xe565F8Aa610440859939C97384245244E4277e7D";
+    "0xfF8053A18f44af056DC718e0A5a344A0B8ccC675";
   try {
     const { ethereum } = window;
     if (ethereum) {
@@ -81,8 +81,10 @@ const askContractToMintNft = async (ipfs) => {
       let seed = "1234567"
       let height = "512"
       let width = "512"
+      let guidance_scale = "52"
+      let steps = "47"
       //
-      let nftTxn = await connectedContract.mintIpfsNFT(name,prompt,ipfs,seed,height,width);
+      let nftTxn = await connectedContract.mintIpfsNFT(name,prompt,ipfs,seed,height,width,guidance_scale,steps);
       console.log("Mining...please wait.");
       await nftTxn.wait();
       console.log(
